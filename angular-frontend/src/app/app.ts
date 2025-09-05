@@ -7,7 +7,8 @@ import { HttpClientModule} from '@angular/common/http'
   selector: 'app-root',
   imports: [RouterOutlet,
       EmployeeList,
-      HttpClientModule],
+      HttpClientModule
+      ],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
