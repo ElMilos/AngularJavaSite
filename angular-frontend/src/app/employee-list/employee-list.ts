@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {Employee} from "../employee";
 import {EmployeeService} from '../employee.service'
@@ -14,7 +15,8 @@ export class EmployeeList {
 
   employees?: Employee[];
 
-  constructor(private employeeService: EmployeeService) {}
+  constructor(private employeeService: EmployeeService,
+    private router: Router) {}
 
   ngOnInit(): void{
       this.getEmployees();
@@ -26,5 +28,20 @@ export class EmployeeList {
       {
         this.employees = data;})
     }
+
+  updateEmployee(id: number | undefined){
+    this.router.navigate(['update-employee', id]);
+    }
+
+  deleteEmployee(id: number | undefined) {
+    if (id !== undefined) {
+      this.employeeService.deleteEmployee(id).subscribe(
+        data => this.getEmployees(),
+        error => console.log(error)
+      );
+    } else {
+      console.warn('Próba usunięcia pracownika bez id!');
+    }
+  }
 
 }
